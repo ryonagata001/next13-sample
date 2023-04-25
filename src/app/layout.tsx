@@ -1,5 +1,12 @@
-import './globals.css'
-import { Inter } from 'next/font/google'
+import './globals.css';
+
+import { Inter } from 'next/font/google';
+import { Suspense } from 'react';
+
+import Footer from './common/components/Footer';
+import Header from './common/components/Header';
+import Main from './common/components/Main';
+import Loading from './loading';
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -14,8 +21,17 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <html lang="en">
-      <body className={inter.className}>{children}</body>
+    <html lang="ja">
+      <head />
+      <body className={inter.className}>
+        <Header />
+        <Main>
+          <Suspense fallback={<Loading />}>
+          {children}
+          </Suspense>
+        </Main>
+        <Footer />
+      </body>
     </html>
   )
 }
